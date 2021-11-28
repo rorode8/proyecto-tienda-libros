@@ -130,6 +130,18 @@ public class wsPagos {
         
         return true;
     }
+    @WebMethod(operationName = "altaCliente")
+    public boolean altaCliente(@WebParam(name="nombre") String nombre){
+        try{
+            Cliente ct = new Cliente();
+            ct.setNombre(nombre);
+            ejbCliente.create(ct);
+        }catch(Exception e){
+            return false;
+        }
+        return true;
+    }
+    
     
     
     

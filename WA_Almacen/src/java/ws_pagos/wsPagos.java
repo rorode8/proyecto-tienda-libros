@@ -38,10 +38,7 @@ public class wsPagos {
     @EJB
     private ClienteFacade ejbCliente;
     
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
-    }
+    
     /**
      * 
      * @param id

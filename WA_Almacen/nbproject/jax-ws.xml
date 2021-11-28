@@ -7,6 +7,9 @@
     <service name="wsPagos">
       <implementation-class>ws_pagos.wsPagos</implementation-class>
     </service>
+    <service name="wsEntregas">
+      <implementation-class>ws_entregas.wsEntregas</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

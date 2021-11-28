@@ -10,7 +10,19 @@
     xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
     xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
     xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling">
-
-   <sequence>
+    <import namespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" location="DescriptorBPEL/VentaLibros.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/wsAlmacenWrapper" location="wsAlmacenWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://ws_almacen/" location="http://localhost:8080/WA_Almacen/wsAlmacen?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/wsEntregasWrapper" location="wsEntregasWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://ws_entregas/" location="http://localhost:8080/WA_Almacen/wsEntregas?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/wsPagosWrapper" location="wsPagosWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://ws_pagos/" location="http://localhost:8080/WA_Almacen/wsPagos?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="ServicioAlmacen" xmlns:tns="http://enterprise.netbeans.org/bpel/wsAlmacenWrapper" partnerLinkType="tns:wsAlmacenLinkType" partnerRole="wsAlmacenRole"/>
+        <partnerLink name="ServicioEntregas" xmlns:tns="http://enterprise.netbeans.org/bpel/wsEntregasWrapper" partnerLinkType="tns:wsEntregasLinkType" partnerRole="wsEntregasRole"/>
+        <partnerLink name="ServicioPagos" xmlns:tns="http://enterprise.netbeans.org/bpel/wsPagosWrapper" partnerLinkType="tns:wsPagosLinkType" partnerRole="wsPagosRole"/>
+        <partnerLink name="VentaLibros" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" partnerLinkType="tns:VentaLibros" myRole="VentaLibrosPortTypeRole"/>
+    </partnerLinks>
+    <sequence>
    </sequence>
 </process>

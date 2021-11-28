@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.2 (UNKNOWN-17d59c9; 2018-09-26T15:16:30-0700) JAXWS-RI/2.3.1 JAXWS-API/2.3.1 JAXB-RI/2.3.1 JAXB-API/2.3.1 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws_entregas/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws_entregas/">
+
+<xs:element name="createEntrega" type="tns:createEntrega"/>
+
+<xs:element name="createEntregaResponse" type="tns:createEntregaResponse"/>
+
+<xs:element name="isPedido" type="tns:isPedido"/>
+
+<xs:element name="isPedidoResponse" type="tns:isPedidoResponse"/>
+
+<xs:complexType name="isPedido">
+<xs:sequence>
+<xs:element name="pedidoid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="isPedidoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createEntrega">
+<xs:sequence>
+<xs:element name="pedidoid" type="xs:int"/>
+<xs:element name="dias" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createEntregaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

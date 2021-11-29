@@ -108,8 +108,9 @@ public class wsPagos {
     @WebMethod(operationName = "modifyCredit")
     public double modifyCredit(@WebParam(name="amount") double amount, @WebParam(name = "creditId") int creditid){
         Credito cre = ejbCredito.find(creditid);
-        double ans = cre.getAmount().doubleValue();
+        double ans = cre.getAmount().doubleValue() + amount;
         cre.setAmount(BigDecimal.valueOf(ans));
+        ejbCredito.edit(cre);
         return ans;
     }
     /**

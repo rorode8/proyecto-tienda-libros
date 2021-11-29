@@ -113,7 +113,7 @@
                                                 <assign name="Assign11">
                                                     <copy>
                                                         <from variable="VentaLibrosOperationIn" part="ISBN"/>
-                                                        <to variable="GetBookIDbyISBNIn" part="parameters"/>
+                                                        <to>$GetBookIDbyISBNIn.parameters/isbn</to>
                                                     </copy>
                                                 </assign>
                                                 <invoke name="Invoke7" partnerLink="ServicioAlmacen" operation="getBookIDbyISBN" xmlns:tns="http://ws_almacen/" portType="tns:wsAlmacen" inputVariable="GetBookIDbyISBNIn" outputVariable="GetBookIDbyISBNOut"/>
@@ -205,7 +205,7 @@
                         <sequence name="Sequence3">
                             <assign name="Assign5">
                                 <copy>
-                                    <from>;'Este credito es invalido'</from>
+                                    <from>'Este credito es invalido'</from>
                                     <to variable="invalidPaymentMethod" part="creditoNoValido"/>
                                 </copy>
                             </assign>
@@ -218,7 +218,7 @@
                 <sequence name="Sequence1">
                     <assign name="Assign3">
                         <copy>
-                            <from>;'Este cliente no existe'</from>
+                            <from>'Este cliente no existe'</from>
                             <to variable="idClienteInvalido" part="ClienteInvalido"/>
                         </copy>
                     </assign>

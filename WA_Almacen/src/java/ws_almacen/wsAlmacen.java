@@ -67,9 +67,15 @@ public class wsAlmacen {
     public int count() {
         return ejbRef.count();
     }
+    @WebMethod(operationName = "getBookIDbyISBN")
+    public int getBookIDbyISBN(@WebParam(name="isbn")String isbn){
+        return ejbRef.getIDbyISBN(isbn);
+    }
 
     /**
-     * Web service operation
+     * 
+     * @param isbn
+     * @return  true si el libro existe (hay un libro con ese isbn
      */
     @WebMethod(operationName = "isISBNUsed")
     public boolean isISBNUsed(@WebParam(name = "isbn") String isbn) {

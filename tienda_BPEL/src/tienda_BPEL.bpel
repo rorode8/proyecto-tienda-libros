@@ -23,6 +23,208 @@
         <partnerLink name="ServicioPagos" xmlns:tns="http://enterprise.netbeans.org/bpel/wsPagosWrapper" partnerLinkType="tns:wsPagosLinkType" partnerRole="wsPagosRole"/>
         <partnerLink name="VentaLibros" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" partnerLinkType="tns:VentaLibros" myRole="VentaLibrosPortTypeRole"/>
     </partnerLinks>
+    <variables>
+        <variable name="ModifyStockOut" xmlns:tns="http://ws_almacen/" messageType="tns:modifyStockResponse"/>
+        <variable name="ModifyStockIn" xmlns:tns="http://ws_almacen/" messageType="tns:modifyStock"/>
+        <variable name="VentaLibrosOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationResponse"/>
+        <variable name="ModifyCreditOut" xmlns:tns="http://ws_pagos/" messageType="tns:modifyCreditResponse"/>
+        <variable name="ModifyCreditIn" xmlns:tns="http://ws_pagos/" messageType="tns:modifyCredit"/>
+        <variable name="GetBookIDbyISBNOut" xmlns:tns="http://ws_almacen/" messageType="tns:getBookIDbyISBNResponse"/>
+        <variable name="GetBookIDbyISBNIn" xmlns:tns="http://ws_almacen/" messageType="tns:getBookIDbyISBN"/>
+        <variable name="CreaPedidoOut" xmlns:tns="http://ws_pagos/" messageType="tns:creaPedidoResponse"/>
+        <variable name="CreaPedidoIn" xmlns:tns="http://ws_pagos/" messageType="tns:creaPedido"/>
+        <variable name="creditoInsuficiente" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationFault"/>
+        <variable name="HasEnoughCreditOut" xmlns:tns="http://ws_pagos/" messageType="tns:hasEnoughCreditResponse"/>
+        <variable name="HasEnoughCreditIn" xmlns:tns="http://ws_pagos/" messageType="tns:hasEnoughCredit"/>
+        <variable name="cantidadNoDisponible" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationFault"/>
+        <variable name="CheckStockOut" xmlns:tns="http://ws_almacen/" messageType="tns:checkStockResponse"/>
+        <variable name="CheckStockIn" xmlns:tns="http://ws_almacen/" messageType="tns:checkStock"/>
+        <variable name="libroNoExiste" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationFault"/>
+        <variable name="IsISBNUsedOut" xmlns:tns="http://ws_almacen/" messageType="tns:isISBNUsedResponse"/>
+        <variable name="IsISBNUsedIn" xmlns:tns="http://ws_almacen/" messageType="tns:isISBNUsed"/>
+        <variable name="invalidPaymentMethod" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationFault"/>
+        <variable name="DoesCreditBelongToClientOut" xmlns:tns="http://ws_pagos/" messageType="tns:doesCreditBelongToClientResponse"/>
+        <variable name="DoesCreditBelongToClientIn" xmlns:tns="http://ws_pagos/" messageType="tns:doesCreditBelongToClient"/>
+        <variable name="idClienteInvalido" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationFault"/>
+        <variable name="IsClientOut" xmlns:tns="http://ws_pagos/" messageType="tns:isClientResponse"/>
+        <variable name="IsClientIn" xmlns:tns="http://ws_pagos/" messageType="tns:isClient"/>
+        <variable name="VentaLibrosOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationRequest"/>
+    </variables>
     <sequence>
-   </sequence>
+        <receive name="Reception" createInstance="yes" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" variable="VentaLibrosOperationIn"/>
+        <assign name="Assign1">
+            <copy>
+                <from variable="VentaLibrosOperationIn" part="idCliente"/>
+                <to>$IsClientIn.parameters/id</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke1" partnerLink="ServicioPagos" operation="isClient" xmlns:tns="http://ws_pagos/" portType="tns:wsPagos" inputVariable="IsClientIn" outputVariable="IsClientOut"/>
+        <if name="If1">
+            <condition>$IsClientOut.parameters/return</condition>
+            <sequence name="Sequence2">
+                <assign name="Assign2">
+                    <copy>
+                        <from variable="VentaLibrosOperationIn" part="idCliente"/>
+                        <to>$DoesCreditBelongToClientIn.parameters/clientid</to>
+                    </copy>
+                    <copy>
+                        <from variable="VentaLibrosOperationIn" part="idCredito"/>
+                        <to>$DoesCreditBelongToClientIn.parameters/creditid</to>
+                    </copy>
+                </assign>
+                <invoke name="Invoke2" partnerLink="ServicioPagos" operation="doesCreditBelongToClient" xmlns:tns="http://ws_pagos/" portType="tns:wsPagos" inputVariable="DoesCreditBelongToClientIn" outputVariable="DoesCreditBelongToClientOut"/>
+                <if name="If2">
+                    <condition>$DoesCreditBelongToClientOut.parameters/return</condition>
+                    <sequence name="Sequence4">
+                        <assign name="Assign4">
+                            <copy>
+                                <from variable="VentaLibrosOperationIn" part="ISBN"/>
+                                <to>$IsISBNUsedIn.parameters/isbn</to>
+                            </copy>
+                        </assign>
+                        <invoke name="Invoke3" partnerLink="ServicioAlmacen" operation="isISBNUsed" xmlns:tns="http://ws_almacen/" portType="tns:wsAlmacen" inputVariable="IsISBNUsedIn" outputVariable="IsISBNUsedOut"/>
+                        <if name="If3">
+                            <condition>$IsISBNUsedOut.parameters/return</condition>
+                            <sequence name="Sequence6">
+                                <assign name="Assign8">
+                                    <copy>
+                                        <from variable="VentaLibrosOperationIn" part="ISBN"/>
+                                        <to>$CheckStockIn.parameters/isbn</to>
+                                    </copy>
+                                </assign>
+                                <invoke name="Invoke4" partnerLink="ServicioAlmacen" operation="checkStock" xmlns:tns="http://ws_almacen/" portType="tns:wsAlmacen" inputVariable="CheckStockIn" outputVariable="CheckStockOut"/>
+                                <if name="If4">
+                                    <condition>$CheckStockOut.parameters/return &gt;= $VentaLibrosOperationIn.unidades and $VentaLibrosOperationIn.unidades &gt; 0</condition>
+                                    <sequence name="Sequence8">
+                                        <assign name="Assign9">
+                                            <copy>
+                                                <from variable="VentaLibrosOperationIn" part="idCredito"/>
+                                                <to>$HasEnoughCreditIn.parameters/creditId</to>
+                                            </copy>
+                                            <copy>
+                                                <from>$VentaLibrosOperationIn.unidades * $VentaLibrosOperationIn.precioUnidad</from>
+                                                <to>$HasEnoughCreditIn.parameters/amount</to>
+                                            </copy>
+                                        </assign>
+                                        <invoke name="Invoke5" partnerLink="ServicioPagos" operation="hasEnoughCredit" xmlns:tns="http://ws_pagos/" portType="tns:wsPagos" inputVariable="HasEnoughCreditIn" outputVariable="HasEnoughCreditOut"/>
+                                        <if name="If5">
+                                            <condition>$HasEnoughCreditOut.parameters/return</condition>
+                                            <sequence name="Sequence10">
+                                                <assign name="Assign11">
+                                                    <copy>
+                                                        <from variable="VentaLibrosOperationIn" part="ISBN"/>
+                                                        <to variable="GetBookIDbyISBNIn" part="parameters"/>
+                                                    </copy>
+                                                </assign>
+                                                <invoke name="Invoke7" partnerLink="ServicioAlmacen" operation="getBookIDbyISBN" xmlns:tns="http://ws_almacen/" portType="tns:wsAlmacen" inputVariable="GetBookIDbyISBNIn" outputVariable="GetBookIDbyISBNOut"/>
+                                                <assign name="Assign13">
+                                                    <copy>
+                                                        <from variable="VentaLibrosOperationIn" part="idCliente"/>
+                                                        <to>$CreaPedidoIn.parameters/clientid</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="VentaLibrosOperationIn" part="unidades"/>
+                                                        <to>$CreaPedidoIn.parameters/cantidad</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from>$GetBookIDbyISBNOut.parameters/return</from>
+                                                        <to>$CreaPedidoIn.parameters/libroid</to>
+                                                    </copy>
+                                                </assign>
+                                                <invoke name="Invoke6" partnerLink="ServicioPagos" operation="creaPedido" xmlns:tns="http://ws_pagos/" portType="tns:wsPagos" inputVariable="CreaPedidoIn" outputVariable="CreaPedidoOut"/>
+                                                <assign name="Assign14">
+                                                    <copy>
+                                                        <from variable="VentaLibrosOperationIn" part="idCredito"/>
+                                                        <to>$ModifyCreditIn.parameters/creditId</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from>-($VentaLibrosOperationIn.unidades * $VentaLibrosOperationIn.precioUnidad)</from>
+                                                        <to>$ModifyCreditIn.parameters/amount</to>
+                                                    </copy>
+                                                </assign>
+                                                <invoke name="Invoke8" partnerLink="ServicioPagos" operation="modifyCredit" xmlns:tns="http://ws_pagos/" portType="tns:wsPagos" inputVariable="ModifyCreditIn" outputVariable="ModifyCreditOut"/>
+                                                <assign name="Assign16">
+                                                    <copy>
+                                                        <from variable="VentaLibrosOperationIn" part="ISBN"/>
+                                                        <to>$ModifyStockIn.parameters/isbn</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from>-$VentaLibrosOperationIn.unidades</from>
+                                                        <to>$ModifyStockIn.parameters/amount</to>
+                                                    </copy>
+                                                </assign>
+                                                <invoke name="Invoke9" partnerLink="ServicioAlmacen" operation="modifyStock" xmlns:tns="http://ws_almacen/" portType="tns:wsAlmacen" inputVariable="ModifyStockIn" outputVariable="ModifyStockOut"/>
+                                                <assign name="Assign15">
+                                                    <copy>
+                                                        <from>'la compra fue exitosa'</from>
+                                                        <to variable="VentaLibrosOperationOut" part="resultado"/>
+                                                    </copy>
+                                                </assign>
+                                                <reply name="Reply4" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" variable="VentaLibrosOperationOut"/>
+                                            </sequence>
+                                            <else>
+                                                <sequence name="Sequence9">
+                                                    <assign name="Assign12">
+                                                        <copy>
+                                                            <from>'Credito Insuficiente'</from>
+                                                            <to variable="creditoInsuficiente" part="CreditoInsuficiente"/>
+                                                        </copy>
+                                                    </assign>
+                                                    <reply name="Reply3" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="creditoInsuficiente"/>
+                                                </sequence>
+                                            </else>
+                                        </if>
+                                    </sequence>
+                                    <else>
+                                        <sequence name="Sequence7">
+                                            <assign name="Assign10">
+                                                <copy>
+                                                    <from>'inventario insuficiente para satisfacer la cantidad deseada'</from>
+                                                    <to variable="cantidadNoDisponible" part="inventarioInsuficiente"/>
+                                                </copy>
+                                            </assign>
+                                            <reply name="Reply2" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="cantidadNoDisponible"/>
+                                        </sequence>
+                                    </else>
+                                </if>
+                            </sequence>
+                            <else>
+                                <sequence name="Sequence5">
+                                    <assign name="Assign7">
+                                        <copy>
+                                            <from>concat('El libro con isbn ', $VentaLibrosOperationIn.ISBN, ' no existe')</from>
+                                            <to variable="libroNoExiste" part="libroNoExiste"/>
+                                        </copy>
+                                    </assign>
+                                    <reply name="LibroNoExiste" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="libroNoExiste"/>
+                                </sequence>
+                            </else>
+                        </if>
+                    </sequence>
+                    <else>
+                        <sequence name="Sequence3">
+                            <assign name="Assign5">
+                                <copy>
+                                    <from>;'Este credito es invalido'</from>
+                                    <to variable="invalidPaymentMethod" part="creditoNoValido"/>
+                                </copy>
+                            </assign>
+                            <reply name="creditoInvalido" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="invalidPaymentMethod"/>
+                        </sequence>
+                    </else>
+                </if>
+            </sequence>
+            <else>
+                <sequence name="Sequence1">
+                    <assign name="Assign3">
+                        <copy>
+                            <from>;'Este cliente no existe'</from>
+                            <to variable="idClienteInvalido" part="ClienteInvalido"/>
+                        </copy>
+                    </assign>
+                    <reply name="Reply1" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="idClienteInvalido"/>
+                </sequence>
+            </else>
+        </if>
+    </sequence>
 </process>

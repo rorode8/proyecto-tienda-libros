@@ -61,6 +61,12 @@
 <message name="checkStockResponse">
 <part name="parameters" element="tns:checkStockResponse"/>
 </message>
+<message name="getBookIDbyISBN">
+<part name="parameters" element="tns:getBookIDbyISBN"/>
+</message>
+<message name="getBookIDbyISBNResponse">
+<part name="parameters" element="tns:getBookIDbyISBNResponse"/>
+</message>
 <portType name="wsAlmacen">
 <operation name="remove">
 <input wsam:Action="http://ws_almacen/wsAlmacen/remove" message="tns:remove"/>
@@ -102,6 +108,10 @@
 <operation name="checkStock">
 <input wsam:Action="http://ws_almacen/wsAlmacen/checkStockRequest" message="tns:checkStock"/>
 <output wsam:Action="http://ws_almacen/wsAlmacen/checkStockResponse" message="tns:checkStockResponse"/>
+</operation>
+<operation name="getBookIDbyISBN">
+<input wsam:Action="http://ws_almacen/wsAlmacen/getBookIDbyISBNRequest" message="tns:getBookIDbyISBN"/>
+<output wsam:Action="http://ws_almacen/wsAlmacen/getBookIDbyISBNResponse" message="tns:getBookIDbyISBNResponse"/>
 </operation>
 </portType>
 <binding name="wsAlmacenPortBinding" type="tns:wsAlmacen">
@@ -188,6 +198,15 @@
 </output>
 </operation>
 <operation name="checkStock">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getBookIDbyISBN">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

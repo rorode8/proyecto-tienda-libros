@@ -76,11 +76,19 @@ public class wsPagos {
         
     }
     
-    
+    /**
+     * is this credit valid to use?
+     * @param clientid
+     * @param creditid
+     * @return  False si el credito no existe o no le pertenece a ese cliente
+     */
     @WebMethod(operationName = "doesCreditBelongToClient")
     public boolean doesCreditBelongToClient(@WebParam(name = "clientid") int clientid, @WebParam(name = "creditid") int creditid) {
         
         Credito cre = ejbCredito.find(creditid);
+        if(!this.isClient(creditid)){
+            return false;
+        }
         return cre.getClienteId().getId() == clientid;
         
     }
@@ -107,7 +115,7 @@ public class wsPagos {
     /**
      *  asume que el libro y el cliente existen
      * @param clientid
-     * @param creditid
+     * @param libroid
      * @param cantidad
      * @return 
      */

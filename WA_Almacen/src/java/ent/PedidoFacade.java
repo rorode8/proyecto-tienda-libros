@@ -23,6 +23,13 @@ public class PedidoFacade extends AbstractFacade<Pedido> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    @Override
+    public void create(Pedido entity) {
+        
+        getEntityManager().persist(entity);
+        getEntityManager().flush();
+    }
 
     public PedidoFacade() {
         super(Pedido.class);

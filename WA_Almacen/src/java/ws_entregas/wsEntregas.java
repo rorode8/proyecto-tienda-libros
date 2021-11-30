@@ -53,16 +53,18 @@ public class wsEntregas {
      * @return true si no existe una entrega para este pedidoid. Afirmado que se creó la entrega
      */
     @WebMethod(operationName= "createEntrega")
-    public boolean createEntrega(@WebParam(name = "pedidoid") int pedidoid, @WebParam(name = "dias") int dias){
+    public int createEntrega(@WebParam(name = "pedidoid") int pedidoid, @WebParam(name = "dias") int dias){
+        int idx = -1;
         if(!ejbEntrega.isValidPedidoID(pedidoid)){ //este pedido ya se entrego
-            return false;
+            idx = -1;
         }else{
             Entrega ent = new Entrega();
             ent.setDias(dias);
             ent.setPedido(ejbPedido.find(pedidoid));
             ejbEntrega.create(ent);
-            return true;
+            idx = ent.getId();
         }
+        return idx;
     }
     
     

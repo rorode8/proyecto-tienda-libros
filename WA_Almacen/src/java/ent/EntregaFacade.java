@@ -29,6 +29,13 @@ public class EntregaFacade extends AbstractFacade<Entrega> {
         super(Entrega.class);
     }
     
+    @Override
+    public void create(Entrega entity) {
+        
+        getEntityManager().persist(entity);
+        getEntityManager().flush();
+    }
+    
     /**
      * 
      * @param pedidoid

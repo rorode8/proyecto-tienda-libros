@@ -17,6 +17,7 @@
     <import namespace="http://ws_entregas/" location="http://localhost:8080/WA_Almacen/wsEntregas?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://enterprise.netbeans.org/bpel/wsPagosWrapper" location="wsPagosWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://ws_pagos/" location="http://localhost:8080/WA_Almacen/wsPagos?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/IncrementaStock" location="DescriptorBPEL/IncrementaStock.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <partnerLinks>
         <partnerLink name="ServicioAlmacen" xmlns:tns="http://enterprise.netbeans.org/bpel/wsAlmacenWrapper" partnerLinkType="tns:wsAlmacenLinkType" partnerRole="wsAlmacenRole"/>
         <partnerLink name="ServicioEntregas" xmlns:tns="http://enterprise.netbeans.org/bpel/wsEntregasWrapper" partnerLinkType="tns:wsEntregasLinkType" partnerRole="wsEntregasRole"/>

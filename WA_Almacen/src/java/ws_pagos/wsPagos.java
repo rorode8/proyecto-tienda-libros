@@ -121,7 +121,8 @@ public class wsPagos {
      * @return 
      */
     @WebMethod(operationName = "creaPedido")
-    public boolean creaPedido(@WebParam(name="clientid") int clientid, @WebParam(name="libroid") int libroid, @WebParam(name="cantidad") int cantidad){
+    public int creaPedido(@WebParam(name="clientid") int clientid, @WebParam(name="libroid") int libroid, @WebParam(name="cantidad") int cantidad){
+        int idx = -1;
         try{
             Cliente ct = ejbCliente.find(clientid);
             Libro lib = ejbLibro.find(libroid);
@@ -131,13 +132,15 @@ public class wsPagos {
             pedido.setLibroId(lib);
             System.out.println("checkPoint1");
             ejbPedido.create(pedido);
+            idx = pedido.getId();
+            System.out.println(pedido.getId());
         }catch(Exception e){
             System.out.println("no se pudo crear pedido");
-            return false;
+            return -1;
         }
         
         
-        return true;
+        return idx;
     }
     @WebMethod(operationName = "altaCliente")
     public boolean altaCliente(@WebParam(name="nombre") String nombre){

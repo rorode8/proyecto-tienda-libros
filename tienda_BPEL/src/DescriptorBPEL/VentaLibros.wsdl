@@ -15,11 +15,9 @@
         <part name="resultado" type="xsd:string"/>
     </message>
     <message name="VentaLibrosOperationFault">
-        <part name="creditoNoValido" type="xsd:string"/>
-        <part name="libroNoExiste" type="xsd:string"/>
-        <part name="inventarioInsuficiente" type="xsd:string"/>
-        <part name="CreditoInsuficiente" type="xsd:string"/>
-        <part name="ClienteInvalido" type="xsd:string"/>
+        <part name="response" type="xsd:string">
+            <documentation/>
+        </part>
     </message>
     <portType name="VentaLibrosPortType">
         <operation name="VentaLibrosOperation">

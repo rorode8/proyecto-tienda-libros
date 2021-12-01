@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import java.util.Random;
 
 /**
  *
@@ -30,7 +31,7 @@ public class wsEntregas {
     @EJB
     private EntregaFacade ejbEntrega;
     
-        
+    private Random random = new Random();
     /**
      * 
      * @param pedidoid
@@ -59,7 +60,7 @@ public class wsEntregas {
             idx = -1;
         }else{
             Entrega ent = new Entrega();
-            ent.setDias(dias);
+            ent.setDias(random.nextInt(7)+1);
             ent.setPedido(ejbPedido.find(pedidoid));
             ejbEntrega.create(ent);
             idx = ent.getId();

@@ -4,23 +4,11 @@
 <xsd:import namespace="http://ws_pagos/" schemaLocation="http://localhost:8080/WA_Almacen/wsPagos?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="isCredit">
-<part name="parameters" element="tns:isCredit"/>
+<message name="altaCliente">
+<part name="parameters" element="tns:altaCliente"/>
 </message>
-<message name="isCreditResponse">
-<part name="parameters" element="tns:isCreditResponse"/>
-</message>
-<message name="hasEnoughCredit">
-<part name="parameters" element="tns:hasEnoughCredit"/>
-</message>
-<message name="hasEnoughCreditResponse">
-<part name="parameters" element="tns:hasEnoughCreditResponse"/>
-</message>
-<message name="isClient">
-<part name="parameters" element="tns:isClient"/>
-</message>
-<message name="isClientResponse">
-<part name="parameters" element="tns:isClientResponse"/>
+<message name="altaClienteResponse">
+<part name="parameters" element="tns:altaClienteResponse"/>
 </message>
 <message name="modifyCredit">
 <part name="parameters" element="tns:modifyCredit"/>
@@ -34,11 +22,23 @@
 <message name="creaPedidoResponse">
 <part name="parameters" element="tns:creaPedidoResponse"/>
 </message>
-<message name="altaCliente">
-<part name="parameters" element="tns:altaCliente"/>
+<message name="isClient">
+<part name="parameters" element="tns:isClient"/>
 </message>
-<message name="altaClienteResponse">
-<part name="parameters" element="tns:altaClienteResponse"/>
+<message name="isClientResponse">
+<part name="parameters" element="tns:isClientResponse"/>
+</message>
+<message name="isCredit">
+<part name="parameters" element="tns:isCredit"/>
+</message>
+<message name="isCreditResponse">
+<part name="parameters" element="tns:isCreditResponse"/>
+</message>
+<message name="hasEnoughCredit">
+<part name="parameters" element="tns:hasEnoughCredit"/>
+</message>
+<message name="hasEnoughCreditResponse">
+<part name="parameters" element="tns:hasEnoughCreditResponse"/>
 </message>
 <message name="doesCreditBelongToClient">
 <part name="parameters" element="tns:doesCreditBelongToClient"/>
@@ -47,17 +47,9 @@
 <part name="parameters" element="tns:doesCreditBelongToClientResponse"/>
 </message>
 <portType name="wsPagos">
-<operation name="isCredit">
-<input wsam:Action="http://ws_pagos/wsPagos/isCreditRequest" message="tns:isCredit"/>
-<output wsam:Action="http://ws_pagos/wsPagos/isCreditResponse" message="tns:isCreditResponse"/>
-</operation>
-<operation name="hasEnoughCredit">
-<input wsam:Action="http://ws_pagos/wsPagos/hasEnoughCreditRequest" message="tns:hasEnoughCredit"/>
-<output wsam:Action="http://ws_pagos/wsPagos/hasEnoughCreditResponse" message="tns:hasEnoughCreditResponse"/>
-</operation>
-<operation name="isClient">
-<input wsam:Action="http://ws_pagos/wsPagos/isClientRequest" message="tns:isClient"/>
-<output wsam:Action="http://ws_pagos/wsPagos/isClientResponse" message="tns:isClientResponse"/>
+<operation name="altaCliente">
+<input wsam:Action="http://ws_pagos/wsPagos/altaClienteRequest" message="tns:altaCliente"/>
+<output wsam:Action="http://ws_pagos/wsPagos/altaClienteResponse" message="tns:altaClienteResponse"/>
 </operation>
 <operation name="modifyCredit">
 <input wsam:Action="http://ws_pagos/wsPagos/modifyCreditRequest" message="tns:modifyCredit"/>
@@ -67,9 +59,17 @@
 <input wsam:Action="http://ws_pagos/wsPagos/creaPedidoRequest" message="tns:creaPedido"/>
 <output wsam:Action="http://ws_pagos/wsPagos/creaPedidoResponse" message="tns:creaPedidoResponse"/>
 </operation>
-<operation name="altaCliente">
-<input wsam:Action="http://ws_pagos/wsPagos/altaClienteRequest" message="tns:altaCliente"/>
-<output wsam:Action="http://ws_pagos/wsPagos/altaClienteResponse" message="tns:altaClienteResponse"/>
+<operation name="isClient">
+<input wsam:Action="http://ws_pagos/wsPagos/isClientRequest" message="tns:isClient"/>
+<output wsam:Action="http://ws_pagos/wsPagos/isClientResponse" message="tns:isClientResponse"/>
+</operation>
+<operation name="isCredit">
+<input wsam:Action="http://ws_pagos/wsPagos/isCreditRequest" message="tns:isCredit"/>
+<output wsam:Action="http://ws_pagos/wsPagos/isCreditResponse" message="tns:isCreditResponse"/>
+</operation>
+<operation name="hasEnoughCredit">
+<input wsam:Action="http://ws_pagos/wsPagos/hasEnoughCreditRequest" message="tns:hasEnoughCredit"/>
+<output wsam:Action="http://ws_pagos/wsPagos/hasEnoughCreditResponse" message="tns:hasEnoughCreditResponse"/>
 </operation>
 <operation name="doesCreditBelongToClient">
 <input wsam:Action="http://ws_pagos/wsPagos/doesCreditBelongToClientRequest" message="tns:doesCreditBelongToClient"/>
@@ -78,25 +78,7 @@
 </portType>
 <binding name="wsPagosPortBinding" type="tns:wsPagos">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="isCredit">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="hasEnoughCredit">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="isClient">
+<operation name="altaCliente">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -123,7 +105,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="altaCliente">
+<operation name="isClient">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="isCredit">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="hasEnoughCredit">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

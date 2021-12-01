@@ -29,44 +29,7 @@ public class wsAlmacen {
     private LibroFacade ejbRef;// Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Web Service Operation")
 
-    @WebMethod(operationName = "create")
-    @Oneway
-    public void create(@WebParam(name = "entity") Libro entity) {
-        ejbRef.create(entity);
-    }
 
-    @WebMethod(operationName = "edit")
-    @Oneway
-    public void edit(@WebParam(name = "entity") Libro entity) {
-        ejbRef.edit(entity);
-    }
-
-    @WebMethod(operationName = "remove")
-    @Oneway
-    public void remove(@WebParam(name = "entity") Libro entity) {
-        ejbRef.remove(entity);
-    }
-
-    @WebMethod(operationName = "find")
-    public Libro find(@WebParam(name = "id") Object id) {
-        
-        return ejbRef.find(id);
-    }
-
-    @WebMethod(operationName = "findAll")
-    public List<Libro> findAll() {
-        return ejbRef.findAll();
-    }
-
-    @WebMethod(operationName = "findRange")
-    public List<Libro> findRange(@WebParam(name = "range") int[] range) {
-        return ejbRef.findRange(range);
-    }
-
-    @WebMethod(operationName = "count")
-    public int count() {
-        return ejbRef.count();
-    }
     @WebMethod(operationName = "getBookIDbyISBN")
     public int getBookIDbyISBN(@WebParam(name="isbn")String isbn){
         return ejbRef.getIDbyISBN(isbn);
@@ -109,10 +72,23 @@ public class wsAlmacen {
     }
     
     @WebMethod(operationName = "checkStock")    
-    public int addStock(@WebParam(name = "isbn") String isbn) {
+    public int checkStock(@WebParam(name = "isbn") String isbn) {
         Libro lib = ejbRef.find(ejbRef.getIDbyISBN(isbn));
         
         return lib.getCantidad();
+    }
+    
+    @WebMethod(operationName = "hasEnoughStock")
+    public boolean hasEnoughStock(@WebParam(name="amount") int amount, @WebParam(name = "isbn") String isbn) {
+        Libro lib = ejbRef.find(ejbRef.getIDbyISBN(isbn));
+        if(amount>0 && lib.getCantidad()>=amount){
+            lib.setCantidad(lib.getCantidad()-amount);
+            ejbRef.edit(lib);
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     
 }

@@ -92,12 +92,25 @@ public class wsPagos {
         return cre.getClienteId().getId() == clientid;
         
     }
-    
+    /**
+     * if the client has enough credit it subtracts the amount and returns true
+     * otherwise it returns false and doesn't do anything
+     * @param amount
+     * @param creditid
+     * @return 
+     */
     @WebMethod(operationName = "hasEnoughCredit")
     public boolean hasEnoughCredit(@WebParam(name="amount") double amount, @WebParam(name = "creditId") int creditid){
         Credito cre = ejbCredito.find(creditid);
+        if(cre.getAmount().doubleValue()>=amount){
+            cre.setAmount(BigDecimal.valueOf(cre.getAmount().doubleValue()-amount) );
+            ejbCredito.edit(cre);
+            return true;
+        }else{
+            return false;
+        }
         
-        return cre.getAmount().doubleValue()>=amount;
+        
     }
     /**
      * assumes creditId already exists

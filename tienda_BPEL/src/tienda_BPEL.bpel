@@ -9,7 +9,7 @@
     xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
     xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
     xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
-    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling">
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:ns0="http://xml.netbeans.org/schema/ventaXmlSchema" xmlns:ns1="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros">
     <import namespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" location="DescriptorBPEL/VentaLibros.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://enterprise.netbeans.org/bpel/wsAlmacenWrapper" location="wsAlmacenWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://ws_almacen/" location="http://localhost:8080/WA_Almacen/wsAlmacen?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
@@ -17,14 +17,17 @@
     <import namespace="http://ws_entregas/" location="http://localhost:8080/WA_Almacen/wsEntregas?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://enterprise.netbeans.org/bpel/wsPagosWrapper" location="wsPagosWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://ws_pagos/" location="http://localhost:8080/WA_Almacen/wsPagos?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
-    
+    <import namespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" location="DescriptorBPEL/myVentaLibros.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <partnerLinks>
         <partnerLink name="ServicioAlmacen" xmlns:tns="http://enterprise.netbeans.org/bpel/wsAlmacenWrapper" partnerLinkType="tns:wsAlmacenLinkType" partnerRole="wsAlmacenRole"/>
         <partnerLink name="ServicioEntregas" xmlns:tns="http://enterprise.netbeans.org/bpel/wsEntregasWrapper" partnerLinkType="tns:wsEntregasLinkType" partnerRole="wsEntregasRole"/>
         <partnerLink name="ServicioPagos" xmlns:tns="http://enterprise.netbeans.org/bpel/wsPagosWrapper" partnerLinkType="tns:wsPagosLinkType" partnerRole="wsPagosRole"/>
-        <partnerLink name="VentaLibros" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" partnerLinkType="tns:VentaLibros" myRole="VentaLibrosPortTypeRole"/>
+        <partnerLink name="myVentaLibros" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" partnerLinkType="tns:myVentaLibros" myRole="myVentaLibrosPortTypeRole"/>
     </partnerLinks>
     <variables>
+        <variable name="MyVentaLibrosOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" messageType="tns:myVentaLibrosOperationResponse"/>
+        <variable name="Fault1FaultVar" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" messageType="tns:operationFault"/>
+        <variable name="MyVentaLibrosOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" messageType="tns:myVentaLibrosOperationRequest"/>
         <variable name="CreateEntregaOut" xmlns:tns="http://ws_entregas/" messageType="tns:createEntregaResponse"/>
         <variable name="CreateEntregaIn" xmlns:tns="http://ws_entregas/" messageType="tns:createEntrega"/>
         <variable name="ModifyStockOut1" xmlns:tns="http://ws_almacen/" messageType="tns:modifyStockResponse"/>
@@ -58,10 +61,10 @@
         <variable name="VentaLibrosOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" messageType="tns:VentaLibrosOperationRequest"/>
     </variables>
     <sequence>
-        <receive name="Reception" createInstance="yes" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" variable="VentaLibrosOperationIn"/>
+        <receive name="Reception" createInstance="yes" partnerLink="myVentaLibros" operation="myVentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" portType="tns:myVentaLibrosPortType" variable="MyVentaLibrosOperationIn"/>
         <assign name="Assign1">
             <copy>
-                <from variable="VentaLibrosOperationIn" part="idCliente"/>
+                <from>$MyVentaLibrosOperationIn.part1/ns0:idCliente</from>
                 <to>$IsClientIn.parameters/id</to>
             </copy>
         </assign>
@@ -71,11 +74,11 @@
             <sequence name="Sequence2">
                 <assign name="Assign2">
                     <copy>
-                        <from variable="VentaLibrosOperationIn" part="idCliente"/>
+                        <from>$MyVentaLibrosOperationIn.part1/ns0:idCliente</from>
                         <to>$DoesCreditBelongToClientIn.parameters/clientid</to>
                     </copy>
                     <copy>
-                        <from variable="VentaLibrosOperationIn" part="idCredito"/>
+                        <from>$MyVentaLibrosOperationIn.part1/ns0:idCredito</from>
                         <to>$DoesCreditBelongToClientIn.parameters/creditid</to>
                     </copy>
                 </assign>
@@ -85,7 +88,7 @@
                     <sequence name="Sequence4">
                         <assign name="Assign4">
                             <copy>
-                                <from variable="VentaLibrosOperationIn" part="ISBN"/>
+                                <from>$MyVentaLibrosOperationIn.part1/ns0:isbn</from>
                                 <to>$IsISBNUsedIn.parameters/isbn</to>
                             </copy>
                         </assign>
@@ -95,12 +98,12 @@
                             <sequence name="Sequence6">
                                 <assign name="Assign8">
                                     <copy>
-                                        <from variable="VentaLibrosOperationIn" part="ISBN"/>
-                                        <to>$HasEnoughStockIn.parameters/isbn</to>
+                                        <from>$MyVentaLibrosOperationIn.part1/ns0:unidades</from>
+                                        <to>$HasEnoughStockIn.parameters/amount</to>
                                     </copy>
                                     <copy>
-                                        <from variable="VentaLibrosOperationIn" part="unidades"/>
-                                        <to>$HasEnoughStockIn.parameters/amount</to>
+                                        <from>$MyVentaLibrosOperationIn.part1/ns0:isbn</from>
+                                        <to>$HasEnoughStockIn.parameters/isbn</to>
                                     </copy>
                                 </assign>
                                 <invoke name="Invoke4" partnerLink="ServicioAlmacen" operation="hasEnoughStock" xmlns:tns="http://ws_almacen/" portType="tns:wsAlmacen" inputVariable="HasEnoughStockIn" outputVariable="HasEnoughStockOut"/>
@@ -109,12 +112,12 @@
                                     <sequence name="Sequence8">
                                         <assign name="Assign9">
                                             <copy>
-                                                <from variable="VentaLibrosOperationIn" part="idCredito"/>
-                                                <to>$HasEnoughCreditIn.parameters/creditId</to>
+                                                <from>$MyVentaLibrosOperationIn.part1/ns0:unidades * $MyVentaLibrosOperationIn.part1/ns0:precioUnidad</from>
+                                                <to>$HasEnoughCreditIn.parameters/amount</to>
                                             </copy>
                                             <copy>
-                                                <from>$VentaLibrosOperationIn.unidades * $VentaLibrosOperationIn.precioUnidad</from>
-                                                <to>$HasEnoughCreditIn.parameters/amount</to>
+                                                <from>$MyVentaLibrosOperationIn.part1/ns0:idCredito</from>
+                                                <to>$HasEnoughCreditIn.parameters/creditId</to>
                                             </copy>
                                         </assign>
                                         <invoke name="Invoke5" partnerLink="ServicioPagos" operation="hasEnoughCredit" xmlns:tns="http://ws_pagos/" portType="tns:wsPagos" inputVariable="HasEnoughCreditIn" outputVariable="HasEnoughCreditOut"/>
@@ -123,23 +126,23 @@
                                             <sequence name="Sequence10">
                                                 <assign name="Assign18">
                                                     <copy>
-                                                        <from variable="VentaLibrosOperationIn" part="ISBN"/>
+                                                        <from>$MyVentaLibrosOperationIn.part1/ns0:isbn</from>
                                                         <to>$GetBookIDbyISBNIn.parameters/isbn</to>
                                                     </copy>
                                                 </assign>
                                                 <invoke name="Invoke9" partnerLink="ServicioAlmacen" operation="getBookIDbyISBN" xmlns:tns="http://ws_almacen/" portType="tns:wsAlmacen" inputVariable="GetBookIDbyISBNIn" outputVariable="GetBookIDbyISBNOut"/>
                                                 <assign name="Assign13">
                                                     <copy>
-                                                        <from variable="VentaLibrosOperationIn" part="idCliente"/>
-                                                        <to>$CreaPedidoIn.parameters/clientid</to>
+                                                        <from>$GetBookIDbyISBNOut.parameters/return</from>
+                                                        <to>$CreaPedidoIn.parameters/libroid</to>
                                                     </copy>
                                                     <copy>
-                                                        <from variable="VentaLibrosOperationIn" part="unidades"/>
+                                                        <from>$MyVentaLibrosOperationIn.part1/ns0:unidades</from>
                                                         <to>$CreaPedidoIn.parameters/cantidad</to>
                                                     </copy>
                                                     <copy>
-                                                        <from>$GetBookIDbyISBNOut.parameters/return</from>
-                                                        <to>$CreaPedidoIn.parameters/libroid</to>
+                                                        <from>$MyVentaLibrosOperationIn.part1/ns0:idCliente</from>
+                                                        <to>$CreaPedidoIn.parameters/clientid</to>
                                                     </copy>
                                                 </assign>
                                                 <invoke name="Invoke6" partnerLink="ServicioPagos" operation="creaPedido" xmlns:tns="http://ws_pagos/" portType="tns:wsPagos" inputVariable="CreaPedidoIn" outputVariable="CreaPedidoOut"/>
@@ -156,21 +159,21 @@
                                                 <invoke name="Invoke8" partnerLink="ServicioEntregas" operation="createEntrega" xmlns:tns="http://ws_entregas/" portType="tns:wsEntregas" inputVariable="CreateEntregaIn" outputVariable="CreateEntregaOut"/>
                                                 <assign name="Assign15">
                                                     <copy>
-                                                        <from>'la compra fue exitosa'</from>
-                                                        <to variable="VentaLibrosOperationOut" part="resultado"/>
+                                                        <from>concat('la compra fue exitosa, entrega numero: ', string($CreateEntregaOut.parameters/return))</from>
+                                                        <to>$MyVentaLibrosOperationOut.part1/ns0:response</to>
                                                     </copy>
                                                 </assign>
-                                                <reply name="Reply4" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" variable="VentaLibrosOperationOut"/>
+                                                <reply name="Reply4" partnerLink="myVentaLibros" operation="myVentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" portType="tns:myVentaLibrosPortType" variable="MyVentaLibrosOperationOut"/>
                                             </sequence>
                                             <else>
                                                 <sequence name="Sequence9">
                                                     <assign name="Assign16">
                                                         <copy>
-                                                            <from variable="VentaLibrosOperationIn" part="ISBN"/>
+                                                            <from>$MyVentaLibrosOperationIn.part1/ns0:isbn</from>
                                                             <to>$ModifyStockIn1.parameters/isbn</to>
                                                         </copy>
                                                         <copy>
-                                                            <from variable="VentaLibrosOperationIn" part="unidades"/>
+                                                            <from>$MyVentaLibrosOperationIn.part1/ns0:unidades</from>
                                                             <to>$ModifyStockIn1.parameters/amount</to>
                                                         </copy>
                                                     </assign>
@@ -178,10 +181,10 @@
                                                     <assign name="Assign12">
                                                         <copy>
                                                             <from>'Credito Insuficiente'</from>
-                                                            <to variable="creditoInsuficiente" part="response"/>
+                                                            <to>$Fault1FaultVar.part1/ns0:faultDetail</to>
                                                         </copy>
                                                     </assign>
-                                                    <reply name="Reply3" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="creditoInsuficiente"/>
+                                                    <reply name="Reply3" partnerLink="myVentaLibros" operation="myVentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" portType="tns:myVentaLibrosPortType" faultName="ns1:fault1" variable="Fault1FaultVar"/>
                                                 </sequence>
                                             </else>
                                         </if>
@@ -191,10 +194,10 @@
                                             <assign name="Assign10">
                                                 <copy>
                                                     <from>'inventario insuficiente para satisfacer la cantidad deseada'</from>
-                                                    <to variable="cantidadNoDisponible" part="response"/>
+                                                    <to>$Fault1FaultVar.part1/ns0:faultDetail</to>
                                                 </copy>
                                             </assign>
-                                            <reply name="Reply2" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="cantidadNoDisponible"/>
+                                            <reply name="Reply2" partnerLink="myVentaLibros" operation="myVentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" portType="tns:myVentaLibrosPortType" faultName="ns1:fault1" variable="Fault1FaultVar"/>
                                         </sequence>
                                     </else>
                                 </if>
@@ -203,11 +206,11 @@
                                 <sequence name="Sequence5">
                                     <assign name="Assign7">
                                         <copy>
-                                            <from>concat('El libro con isbn ', $VentaLibrosOperationIn.ISBN, ' no existe')</from>
-                                            <to variable="libroNoExiste" part="response"/>
+                                            <from>concat('El libro con isbn ', $MyVentaLibrosOperationIn.part1/ns0:isbn, ' no existe')</from>
+                                            <to>$Fault1FaultVar.part1/ns0:faultDetail</to>
                                         </copy>
                                     </assign>
-                                    <reply name="LibroNoExiste" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="libroNoExiste"/>
+                                    <reply name="LibroNoExiste" partnerLink="myVentaLibros" operation="myVentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" portType="tns:myVentaLibrosPortType" faultName="ns1:fault1" variable="Fault1FaultVar"/>
                                 </sequence>
                             </else>
                         </if>
@@ -217,10 +220,10 @@
                             <assign name="Assign5">
                                 <copy>
                                     <from>'Este credito es invalido'</from>
-                                    <to variable="invalidPaymentMethod" part="response"/>
+                                    <to>$Fault1FaultVar.part1/ns0:faultDetail</to>
                                 </copy>
                             </assign>
-                            <reply name="creditoInvalido" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="invalidPaymentMethod"/>
+                            <reply name="creditoInvalido" partnerLink="myVentaLibros" operation="myVentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" portType="tns:myVentaLibrosPortType" faultName="ns1:fault1" variable="Fault1FaultVar"/>
                         </sequence>
                     </else>
                 </if>
@@ -230,10 +233,10 @@
                     <assign name="Assign3">
                         <copy>
                             <from>'Este cliente no existe'</from>
-                            <to variable="idClienteInvalido" part="response"/>
+                            <to>$Fault1FaultVar.part1/ns0:faultDetail</to>
                         </copy>
                     </assign>
-                    <reply name="Reply1" partnerLink="VentaLibros" operation="VentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" portType="tns:VentaLibrosPortType" faultName="tns:fault1" variable="idClienteInvalido"/>
+                    <reply name="Reply1" partnerLink="myVentaLibros" operation="myVentaLibrosOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/myVentaLibros" portType="tns:myVentaLibrosPortType" faultName="ns1:fault1" variable="Fault1FaultVar"/>
                 </sequence>
             </else>
         </if>

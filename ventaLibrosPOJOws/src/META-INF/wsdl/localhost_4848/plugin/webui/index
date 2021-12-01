@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en" data-ng-app="openesbApp" data-ng-controller="MainCtrl"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta charset="utf-8"><title>OpenESB Web Console</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta content="width=device-width, initial-scale=1" name="viewport"><meta name="description" content="OpenESB Web Console"><meta name="author" content="David BRASSELY"><link rel="stylesheet" href="styles/74e119a9.vendor.css"><link rel="stylesheet" href="styles/656c973b.main.css"><body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-fixed" ng-class="{'body-login': !authenticated}"><div class="page-header navbar navbar-fixed-top"><div class="page-header-inner"><div class="page-logo"><i class="logo-default"><img src="img/openesb-icon.png" width="48" height="48">&nbsp;Open<span style="color: #d64635; font-size: 22px">ESB</span></i><div class="menu-toggler sidebar-toggler" data-ng-if="authenticated"></div></div><div class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse" data-ng-if="authenticated"></div><div class="top-menu"><ul class="nav navbar-nav pull-right" data-ng-if="authenticated"><!--
+                <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <i class="fa fa-warning"></i>
+                        <span class="badge badge-danger">
+                        7 </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <p>
+                                You have 14 new notifications
+                            </p>
+                        </li>
+                        <li>
+                            <ul class="dropdown-menu-list scroller" style="height: 250px;">
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-success">
+                                        <i class="fa fa-plus"></i>
+                                        </span>
+                                        New user registered. <span class="time">
+                                        Just now </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-danger">
+                                        <i class="fa fa-bolt"></i>
+                                        </span>
+                                        Server #12 overloaded. <span class="time">
+                                        15 mins </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-warning">
+                                        <i class="fa fa-bell-o"></i>
+                                        </span>
+                                        Server #2 not responding. <span class="time">
+                                        22 mins </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-info">
+                                        <i class="fa fa-bullhorn"></i>
+                                        </span>
+                                        Application error. <span class="time">
+                                        40 mins </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-danger">
+                                        <i class="fa fa-bolt"></i>
+                                        </span>
+                                        Database overloaded 68%. <span class="time">
+                                        2 hrs </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-danger">
+                                        <i class="fa fa-bolt"></i>
+                                        </span>
+                                        2 user IP blocked. <span class="time">
+                                        5 hrs </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-warning">
+                                        <i class="fa fa-bell-o"></i>
+                                        </span>
+                                        Storage Server #4 not responding. <span class="time">
+                                        45 mins </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-info">
+                                        <i class="fa fa-bullhorn"></i>
+                                        </span>
+                                        System Error. <span class="time">
+                                        55 mins </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="label label-sm label-icon label-danger">
+                                        <i class="fa fa-bolt"></i>
+                                        </span>
+                                        Database overloaded 68%. <span class="time">
+                                        2 hrs </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="external">
+                            <a href="#/notifications">
+                                See all notifications <i class="m-icon-swapright"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                --><li class="dropdown dropdown-user"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"><span class="glyphicon glyphicon-user"></span> <span class="username">{{username}}</span><i class="fa fa-angle-down"></i></a><ul class="dropdown-menu"><li><a href="#/logout"><i class="fa fa-key"></i> Log Out</a></li></ul></li></ul></div></div></div><div class="clearfix"></div><div class="page-container"><toaster-container></toaster-container><div class="page-sidebar navbar-collapse collapse" data-ng-if="authenticated"><ul class="page-sidebar-menu hidden-sm hidden-xs"><br><li class="start" data-ng-class="{ active: isDashboard }"><a href="#/home"><i class="fa fa-home"></i> <span class="title">Dashboard</span> <span class="selected"></span></a></li><li data-ng-class="{ active: isInstance }"><a href="#/instance"><i class="fa fa-road"></i> <span class="title">Instance</span> <span class="selected"></span></a></li><li data-ng-class="{ active: isAssemblies }"><a href="#/assemblies"><i class="fa fa-list"></i> <span class="title">Service Assemblies</span> <span class="selected"></span></a></li><li data-ng-class="{ active: isComponents }"><a href="#/components"><i class="fa fa-cogs"></i> <span class="title">Components</span> <span class="selected"></span></a></li><li data-ng-class="{ active: isLibraries }"><a href="#/libraries"><i class="fa fa-book"></i> <span class="title">Shared Libraries</span> <span class="selected"></span></a></li><li class="last" data-ng-class="{ active: isEndpoints }"><a href="#/endpoints"><i class="fa fa-crosshairs"></i> <span class="title">Endpoints</span> <span class="selected"></span></a></li></ul><ul class="page-sidebar-menu visible-sm visible-xs" data-slide-speed="200" data-auto-scroll="true"><li class="start" data-ng-class="{ active: isDashboard }"><a href="#/home"><i class="fa fa-home"></i> <span class="title">Dashboard</span> <span class="selected"></span></a></li><li data-ng-class="{ active: isInstance }"><a href="#/instance"><i class="fa fa-road"></i> <span class="title">Instance</span></a></li><li data-ng-class="{ active: isAssemblies }"><a href="#/assemblies"><i class="fa fa-list"></i> <span class="title">Service Assemblies</span></a></li><li data-ng-class="{ active: isComponents }"><a href="#/components"><i class="fa fa-cogs"></i> <span class="title">Components</span></a></li><li data-ng-class="{ active: isLibraries }"><a href="#/libraries"><i class="fa fa-book"></i> <span class="title">Shared Libraries</span></a></li><li class="last" data-ng-class="{ active: isEndpoints }"><a href="#/endpoints"><i class="fa fa-crosshairs"></i> <span class="title">Endpoints</span></a></li></ul></div><div class="page-content-wrapper"><div class="page-content" ng-class="{'page-content-login': !authenticated}"><div data-ui-view=""></div></div></div></div><div class="page-footer"><div class="page-footer-inner">2015 &copy; <a href="http://www.open-esb.net" target="_blank">OpenESB Community</a></div><div class="page-footer-tools"><span class="go-top"><i class="fa fa-angle-up"></i></span></div></div><!-- Load javascripts at bottom, this will reduce page load time --><script src="scripts/d4cb1c86.vendor.js"></script><script src="scripts/e70fd2e0.scripts.js"></script>

@@ -7,7 +7,9 @@
       <faultcode>SOAP-ENV:Client</faultcode>
       <faultstring>fault1</faultstring>
       <detail>
-        <response>Credito Insuficiente</response>
+        <myFault xmlns="http://xml.netbeans.org/schema/ventaXmlSchema">
+          <faultDetail>Credito Insuficiente</faultDetail>
+        </myFault>
       </detail>
     </SOAP-ENV:Fault>
   </SOAP-ENV:Body>

@@ -11,14 +11,13 @@
         <part name="precioUnidad" type="xsd:int"/>
         <part name="idCredito" type="xsd:int"/>
     </message>
-    <message name="VentaLibrosOperationResponse">
-        <part name="resultado" type="xsd:string"/>
-    </message>
     <message name="VentaLibrosOperationFault">
-        <part name="response" type="xsd:string">
-            <documentation/>
-        </part>
+        <part name="response" type="xsd:string" soap:element="" xsd:element="" tns:element=""/>
     </message>
+    <message name="VentaLibrosOperationResponse">
+        <part name="resultado" type="xsd:string" />
+    </message>
+    
     <portType name="VentaLibrosPortType">
         <operation name="VentaLibrosOperation">
             <input name="input1" message="tns:VentaLibrosOperationRequest"/>

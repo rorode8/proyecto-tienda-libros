@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://148.205.199.131:8080/MisWebServices/miServicioWeb?WSDL" uri="xml-resources/web-service-references/miServicioWeb/wsdl/148.205.199.131_8080/MisWebServices/miServicioWeb.wsdl"/>
+    <system systemId="http://148.205.199.131:8080/MisWebServices/miServicioWeb?xsd=1" uri="xml-resources/web-service-references/miServicioWeb/wsdl/148.205.199.131_8080/MisWebServices/miServicioWeb.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/POJOSaludo/saludo?WSDL" uri="xml-resources/web-service-references/saludo/wsdl/localhost_8080/POJOSaludo/saludo.wsdl"/>
+    <system systemId="http://localhost:8080/POJOSaludo/saludo?xsd=1" uri="xml-resources/web-service-references/saludo/wsdl/localhost_8080/POJOSaludo/saludo.xsd_1.xsd"/>
+    <system systemId="http://localhost:9080/MyCalculatorModuloCAService1/casaPort1?WSDL" uri="wsdl/localhost_9080/MyCalculatorModuloCAService1/casaPort1.wsdl"/>
+    <system systemId="http://DESKTOP-9HHLUND:9080/MyCalculatorModuloCA-sun-http-binding/Calculadora/Calculadora.wsdl" uri="wsdl/DESKTOP-9HHLUND_9080/MyCalculatorModuloCA-sun-http-binding/Calculadora/Calculadora.wsdl"/>
+    <system systemId="http://DESKTOP-9HHLUND:9080/MyCalculatorModuloCA-sun-http-binding/Calculadora/CalculadoraSchema.xsd" uri="wsdl/DESKTOP-9HHLUND_9080/MyCalculatorModuloCA-sun-http-binding/Calculadora/CalculadoraSchema.xsd"/>
+    <system systemId="http://localhost:9080/AplicacionLibroOnlineService1/casaPort1?WSDL" uri="wsdl/localhost_9080/AplicacionLibroOnlineService1/casaPort1.wsdl"/>
+    <system systemId="http://DESKTOP-9HHLUND:9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/myVentaLibros.wsdl" uri="wsdl/DESKTOP-9HHLUND_9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/myVentaLibros.wsdl"/>
+    <system systemId="http://DESKTOP-9HHLUND:9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/ventaXmlSchema.xsd" uri="wsdl/DESKTOP-9HHLUND_9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/ventaXmlSchema.xsd"/>
+</catalog>

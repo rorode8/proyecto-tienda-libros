@@ -1,0 +1,11 @@
+<soapenv:Envelope xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ven="http://xml.netbeans.org/schema/ventaXmlSchema">
+  <soapenv:Body>
+    <ven:myInput>
+      <ven:isbn>ISBNinvalido</ven:isbn>
+      <ven:idCliente>1</ven:idCliente>
+      <ven:unidades>3</ven:unidades>
+      <ven:precioUnidad>3</ven:precioUnidad>
+      <ven:idCredito>1</ven:idCredito>
+    </ven:myInput>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,23 @@
+F7to_semestreSistemas_de_ComercioOpenESB-SE-3.1.2.3-aproyecto_librosSimpleRMIAutonomojava -Djava.rmi.server.codebase=filetstRMI.jar -jar tstRMI.jar Master localhost reporta
+Distribuidor, inciando con
+args[0]Master
+args[1]localhost
+args[2]reporta
+------------------------------------------
+Distribuidor redirigiendo a args[0]Master
+Master, inciando con
+args[0]localhost
+args[1]reporta
+------------------------------------------
+================================================
+    cantidad de clientes10
+   cantidad de servicios1000
+media de tiempo de ciclo130.0 miliSeg
+ dev std tiempo de ciclo5556.752752752753 miliSeg
+  tiempo de ciclo máximo628 miliSeg
+  tiempo de ciclo mínimo45 miliSeg
+Distribuidor...
+
+F7to_semestreSistemas_de_ComercioOpenESB-SE-3.1.2.3-aproyecto_librosSimpleRMIAutonomogoto fin
+
+F7to_semestreSistemas_de_ComercioOpenESB-SE-3.1.2.3-aproyecto_librosSimpleRMIAutonomopause

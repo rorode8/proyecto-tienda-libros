@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="VentaLibros" targetNamespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros">
+  <types>
+  </types>
+  <message name="VentaLibrosOperationRequest">
+    <part name="ISBN" type="xsd:string">
+    </part>
+    <part name="idCliente" type="xsd:int">
+    </part>
+    <part name="unidades" type="xsd:int">
+    </part>
+    <part name="precioUnidad" type="xsd:int">
+    </part>
+    <part name="idCredito" type="xsd:int">
+    </part>
+  </message>
+  <message name="VentaLibrosOperationFault">
+    <part name="response" plnk:element="" soap:element="" tns:element="" type="xsd:string" xsd:element="">
+    </part>
+  </message>
+  <message name="VentaLibrosOperationResponse">
+    <part name="resultado" type="xsd:string">
+    </part>
+  </message>
+  <portType name="VentaLibrosPortType">
+    <operation name="VentaLibrosOperation">
+      <input message="tns:VentaLibrosOperationRequest" name="input1">
+    </input>
+      <output message="tns:VentaLibrosOperationResponse" name="output1">
+    </output>
+      <fault message="tns:VentaLibrosOperationFault" name="fault1">
+    </fault>
+    </operation>
+  </portType>
+  <binding name="VentaLibrosBinding" type="tns:VentaLibrosPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="VentaLibrosOperation">
+      <soap:operation/>
+      <input name="input1">
+        <soap:body namespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" use="literal"/>
+      </input>
+      <output name="output1">
+        <soap:body namespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" use="literal"/>
+      </output>
+      <fault name="fault1">
+        <soap:fault name="fault1" namespace="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="VentaLibrosService">
+    <port binding="tns:VentaLibrosBinding" name="VentaLibrosPort">
+      <soap:address location="http://DESKTOP-9HHLUND:9080/VentaLibrosService/VentaLibrosPort"/>
+    </port>
+  </service>
+    <plnk:partnerLinkType name="VentaLibros">
+        <!-- A partner link type is automatically generated when a new port type is added. Partner link types are used by BPEL processes. 
+In a BPEL process, a partner link represents the interaction between the BPEL process and a partner service. Each partner link is associated with a partner link type.
+A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
+        <plnk:role name="VentaLibrosPortTypeRole" portType="tns:VentaLibrosPortType"/>
+    </plnk:partnerLinkType>
+</definitions>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:tns="http://xml.netbeans.org/schema/ventaXmlSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://xml.netbeans.org/schema/ventaXmlSchema">
+    <xsd:complexType name="inputComplexType">
+        <xsd:sequence>
+            <xsd:element name="isbn" type="xsd:string"/>
+            <xsd:element name="idCliente" type="xsd:int"/>
+            <xsd:element name="unidades" type="xsd:int"/>
+            <xsd:element name="precioUnidad" type="xsd:int"/>
+            <xsd:element name="idCredito" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="outputComplexType">
+        <xsd:sequence>
+            <xsd:element name="response" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="outputFault">
+        <xsd:sequence>
+            <xsd:element name="faultDetail" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="myInput" type="tns:inputComplexType"/>
+    <xsd:element name="myOutput" type="tns:outputComplexType"/>
+    <xsd:element name="myFault" type="tns:outputFault"/>
+</xsd:schema>

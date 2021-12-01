@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:9080/AplicacionLibroOnlineService1/casaPort1?WSDL" uri="wsdl/localhost_9080/AplicacionLibroOnlineService1/casaPort1.wsdl"/>
+    <system systemId="http://DESKTOP-9HHLUND:9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/myVentaLibros.wsdl" uri="wsdl/DESKTOP-9HHLUND_9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/myVentaLibros.wsdl"/>
+    <system systemId="http://DESKTOP-9HHLUND:9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/ventaXmlSchema.xsd" uri="wsdl/DESKTOP-9HHLUND_9080/AplicacionLibroOnline-sun-http-binding/tienda_BPEL/DescriptorBPEL/ventaXmlSchema.xsd"/>
+</catalog>

@@ -1,0 +1,18 @@
+ase=file:///"tstRMI.jar" -jar "tstRMI.jar" Master localhost reporta
+Distribuidor, inciando con:
+args[0]:Master
+args[1]:localhost
+args[2]:reporta
+------------------------------------------
+Distribuidor redirigiendo a args[0]:Master
+Master, inciando con:
+args[0]:localhost
+args[1]:reporta
+------------------------------------------
+================================================
+    cantidad de clientes:15
+   cantidad de servicios:150
+media de tiempo de ciclo:405.0 miliSeg
+ dev std tiempo de ciclo:52876.409395973154 miliSeg
+  tiempo de ciclo máximo:1103 miliSeg
+  tiempo de ciclo mínimo:146 miliSeg

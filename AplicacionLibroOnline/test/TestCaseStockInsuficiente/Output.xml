@@ -7,7 +7,9 @@
       <faultcode>SOAP-ENV:Client</faultcode>
       <faultstring>fault1</faultstring>
       <detail>
-        <response>inventario insuficiente para satisfacer la cantidad deseada</response>
+        <myFault xmlns="http://xml.netbeans.org/schema/ventaXmlSchema">
+          <faultDetail>inventario insuficiente para satisfacer la cantidad deseada</faultDetail>
+        </myFault>
       </detail>
     </SOAP-ENV:Fault>
   </SOAP-ENV:Body>

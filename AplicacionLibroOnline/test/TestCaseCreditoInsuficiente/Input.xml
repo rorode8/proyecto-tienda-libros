@@ -1,11 +1,11 @@
-<soapenv:Envelope xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ven="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros">
+<soapenv:Envelope xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ven="http://xml.netbeans.org/schema/ventaXmlSchema">
   <soapenv:Body>
-    <ven:VentaLibrosOperation>
-      <ISBN>2928183</ISBN>
-      <idCliente>2</idCliente>
-      <unidades>20</unidades>
-      <precioUnidad>1000</precioUnidad>
-      <idCredito>2</idCredito>
-    </ven:VentaLibrosOperation>
+    <ven:myInput>
+      <ven:isbn>2928183</ven:isbn>
+      <ven:idCliente>1</ven:idCliente>
+      <ven:unidades>10</ven:unidades>
+      <ven:precioUnidad>2000</ven:precioUnidad>
+      <ven:idCredito>1</ven:idCredito>
+    </ven:myInput>
   </soapenv:Body>
 </soapenv:Envelope>

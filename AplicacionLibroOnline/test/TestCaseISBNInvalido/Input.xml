@@ -1,0 +1,11 @@
+<soapenv:Envelope xsi:schemaLocation="http://schemas.xmlsoap.org/soap/envelope/ http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ven="http://j2ee.netbeans.org/wsdl/tienda_BPEL/DescriptorBPEL/VentaLibros">
+  <soapenv:Body>
+    <ven:VentaLibrosOperation>
+      <ISBN>isbnoNoexistente</ISBN>
+      <idCliente>1</idCliente>
+      <unidades>5</unidades>
+      <precioUnidad>5</precioUnidad>
+      <idCredito>1</idCredito>
+    </ven:VentaLibrosOperation>
+  </soapenv:Body>
+</soapenv:Envelope>

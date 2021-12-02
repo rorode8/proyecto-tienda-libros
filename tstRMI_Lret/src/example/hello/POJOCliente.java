@@ -69,8 +69,8 @@ public class POJOCliente {
              for(i= 0; i < n; i++ )
              {
                t0 = System.currentTimeMillis();
-               part1.setIdCliente(rand.nextInt(1)+1);
-               part1.setIdCredito(rand.nextInt(1)+1);
+               part1.setIdCliente(rand.nextInt(2)+1);
+               part1.setIdCredito(rand.nextInt(2)+1);
                
                try{
                     response =port.myVentaLibrosOperation(part1).getResponse();
